@@ -4,19 +4,29 @@ import { Cormorant_Garamond, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const _cormorant = Cormorant_Garamond({ 
+const cormorant = Cormorant_Garamond({ 
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"]
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-serif", // Я добавил переменную, чтобы шрифт заработал
 });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+
+const geistMono = Geist_Mono({ 
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
 
 export const metadata = {
+  metadataBase: new URL('https://kudin-website.vercel.app'), // Это поможет браузеру найти картинки
   title: 'Kudin & Sons | Bespoke Ultrasonic Restoration',
   description: 'Revitalising your finest possessions with precision ultrasonic technology. Eyewear, cutlery, and specialist tool restoration services delivered to your door in Winchester.',
   icons: {
     icon: '/icon.png',
     shortcut: '/icon.png',
     apple: '/icon.png',
+    other: {
+      rel: 'apple-touch-icon-precomposed',
+      url: '/icon.png',
+    },
   },
 }
 
@@ -31,7 +41,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans antialiased`}>
+      {/* Я добавил переменные шрифтов в className, теперь заголовки станут красивыми */}
+      <body className={`font-sans antialiased ${cormorant.variable} ${geistMono.variable}`}>
         {children}
         <Analytics />
       </body>
