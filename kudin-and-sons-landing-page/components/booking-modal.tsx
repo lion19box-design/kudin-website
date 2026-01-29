@@ -22,7 +22,6 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
     consent: false,
   })
 
-  // Update service when preSelectedService changes
   useEffect(() => {
     if (preSelectedService) {
       setFormData(prev => ({ ...prev, service: preSelectedService }))
@@ -31,12 +30,13 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
+    if (!formData.consent) return; // Блокировка без галочки
     setIsSubmitted(true)
   }
 
   const handleClose = () => {
     setIsSubmitted(false)
-    setFormData({ fullName: "", phone: "", email: "", service: "", comments: "" })
+    setFormData({ fullName: "", phone: "", email: "", service: "", comments: "", consent: false })
     onClose()
   }
 
@@ -44,129 +44,68 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Glassmorphism backdrop */}
       <div
         className="absolute inset-0 bg-navy/60 backdrop-blur-md"
         onClick={handleClose}
-        onKeyDown={(e) => e.key === "Escape" && handleClose()}
-        role="button"
-        tabIndex={0}
-        aria-label="Close modal"
       />
-
-      {/* Modal window */}
       <div className="relative z-10 w-full max-w-md border border-gold/50 bg-navy-light/95 p-8 shadow-2xl backdrop-blur-sm max-h-[90vh] overflow-y-auto">
-        {/* Close button */}
         <button
-          type="button"
           onClick={handleClose}
-          className="absolute top-4 right-4 text-silver-muted transition-colors hover:text-gold"
-          aria-label="Close modal"
+          className="absolute top-4 right-4 text-silver-muted hover:text-gold"
         >
           <X className="h-6 w-6" />
         </button>
 
         {!isSubmitted ? (
           <>
-            {/* Header */}
             <div className="mb-8 text-center">
-              <div className="mb-4 flex items-center justify-center gap-3">
-                <div className="h-px w-8 bg-gold/60" />
-                <span className="text-xs font-medium uppercase tracking-[0.2em] text-gold">
-                  Book Your Visit
-                </span>
-                <div className="h-px w-8 bg-gold/60" />
-              </div>
-              <h3 className="font-serif text-2xl font-light text-foreground">
-                Request an Appointment
-              </h3>
+              <span className="text-xs font-medium uppercase tracking-[0.2em] text-gold">Book Your Visit</span>
+              <h3 className="font-serif text-2xl font-light text-foreground mt-2">Request an Appointment</h3>
             </div>
 
-            {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Full Name */}
               <div className="space-y-2">
-                <label
-                  htmlFor="fullName"
-                  className="block text-sm font-medium uppercase tracking-wider text-silver-muted"
-                >
-                  Full Name
-                </label>
+                <label className="block text-sm font-medium uppercase tracking-wider text-silver-muted">Full Name</label>
                 <input
                   type="text"
-                  id="fullName"
                   required
                   value={formData.fullName}
-                  onChange={(e) =>
-                    setFormData({ ...formData, fullName: e.target.value })
-                  }
-                  className="w-full border border-navy-lighter bg-navy/50 px-4 py-3 font-serif text-foreground placeholder:text-silver-muted/50 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
-                  placeholder="Your full name"
+                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                  className="w-full border border-navy-lighter bg-navy/50 px-4 py-3 font-serif text-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
                 />
               </div>
 
-              {/* Phone Number */}
               <div className="space-y-2">
-                <label
-                  htmlFor="phone"
-                  className="block text-sm font-medium uppercase tracking-wider text-silver-muted"
-                >
-                  Phone Number
-                </label>
+                <label className="block text-sm font-medium uppercase tracking-wider text-silver-muted">Phone Number</label>
                 <input
                   type="tel"
-                  id="phone"
                   required
                   value={formData.phone}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phone: e.target.value })
-                  }
-                  className="w-full border border-navy-lighter bg-navy/50 px-4 py-3 font-serif text-foreground placeholder:text-silver-muted/50 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
-                  placeholder="+44 7XXX XXXXXX"
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full border border-navy-lighter bg-navy/50 px-4 py-3 font-serif text-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
                 />
               </div>
 
-              {/* Email Address */}
               <div className="space-y-2">
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium uppercase tracking-wider text-silver-muted"
-                >
-                  Email Address
-                </label>
+                <label className="block text-sm font-medium uppercase tracking-wider text-silver-muted">Email Address</label>
                 <input
                   type="email"
-                  id="email"
                   required
                   value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  className="w-full border border-navy-lighter bg-navy/50 px-4 py-3 font-serif text-foreground placeholder:text-silver-muted/50 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
-                  placeholder="your.email@example.com"
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full border border-navy-lighter bg-navy/50 px-4 py-3 font-serif text-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
                 />
               </div>
 
-              {/* Service Type */}
               <div className="space-y-2">
-                <label
-                  htmlFor="service"
-                  className="block text-sm font-medium uppercase tracking-wider text-silver-muted"
-                >
-                  Service Type
-                </label>
+                <label className="block text-sm font-medium uppercase tracking-wider text-silver-muted">Service Type</label>
                 <select
-                  id="service"
                   required
                   value={formData.service}
-                  onChange={(e) =>
-                    setFormData({ ...formData, service: e.target.value as ServiceType })
-                  }
+                  onChange={(e) => setFormData({ ...formData, service: e.target.value as ServiceType })}
                   className="w-full appearance-none border border-navy-lighter bg-navy/50 px-4 py-3 font-serif text-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
                 >
-                  <option value="" disabled>
-                    Select a service
-                  </option>
+                  <option value="" disabled>Select a service</option>
                   <option value="eyewear">Eyewear Cleaning</option>
                   <option value="cutlery">Cutlery Polishing</option>
                   <option value="knives">Knife Sharpening</option>
@@ -174,56 +113,47 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
                 </select>
               </div>
 
-              {/* Additional Comments */}
               <div className="space-y-2">
-                <label
-                  htmlFor="comments"
-                  className="block text-sm font-medium uppercase tracking-wider text-silver-muted"
-                >
-                  Additional Comments
-                </label>
+                <label className="block text-sm font-medium uppercase tracking-wider text-silver-muted">Additional Comments</label>
                 <textarea
-                  id="comments"
                   rows={3}
                   value={formData.comments}
-                  onChange={(e) =>
-                    setFormData({ ...formData, comments: e.target.value })
-                  }
-                  className="w-full resize-none border border-navy-lighter bg-navy/50 px-4 py-3 font-serif text-foreground placeholder:text-silver-muted/50 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
-                  placeholder="Any special requests or details..."
+                  onChange={(e) => setFormData({ ...formData, comments: e.target.value })}
+                  className="w-full border border-navy-lighter bg-navy/50 px-4 py-3 font-serif text-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
                 />
               </div>
 
-              {/* Submit Button */}
+              {/* ВОТ ОНА, НАША ГАЛОЧКА */}
+              <div className="flex items-start gap-3 pt-2">
+                <div className="flex h-6 items-center">
+                  <input
+                    id="consent"
+                    type="checkbox"
+                    required
+                    checked={formData.consent}
+                    onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
+                    className="h-4 w-4 rounded border-navy-lighter bg-navy/50 text-gold focus:ring-gold accent-gold"
+                  />
+                </div>
+                <label htmlFor="consent" className="text-xs text-silver-muted/80 leading-tight cursor-pointer">
+                  I consent to Kudin & Sons processing my data in accordance with the <a href="#" className="underline hover:text-gold">Privacy Policy</a>.
+                </label>
+              </div>
+
               <button
                 type="submit"
-                className="btn-interactive group mt-6 flex w-full items-center justify-center gap-3 border border-gold bg-gold px-8 py-4 font-serif text-lg font-medium text-navy hover:bg-gold-light"
+                className="group mt-6 flex w-full items-center justify-center gap-3 border border-gold bg-gold px-8 py-4 font-serif text-lg font-medium text-navy hover:bg-gold-light"
               >
-                <Send className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                <Send className="h-5 w-5" />
                 Submit Request
               </button>
             </form>
           </>
         ) : (
-          /* Success state */
           <div className="flex flex-col items-center py-8 text-center">
-            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-gold/30 bg-gold/10">
-              <CheckCircle className="h-8 w-8 text-gold" />
-            </div>
-            <h3 className="mb-3 font-serif text-2xl font-light text-foreground">
-              Thank You
-            </h3>
-            <p className="mb-8 max-w-xs text-silver-muted">
-              Thank you for your request. We will contact you shortly to confirm
-              your appointment.
-            </p>
-            <button
-              type="button"
-              onClick={handleClose}
-              className="btn-interactive border border-gold/50 px-8 py-3 font-serif text-sm font-medium text-gold hover:border-gold hover:bg-gold/10"
-            >
-              Close
-            </button>
+            <CheckCircle className="h-16 w-16 text-gold mb-6" />
+            <h3 className="mb-3 font-serif text-2xl font-light text-foreground">Thank You</h3>
+            <button onClick={handleClose} className="border border-gold/50 px-8 py-3 text-gold hover:bg-gold/10">Close</button>
           </div>
         )}
       </div>
