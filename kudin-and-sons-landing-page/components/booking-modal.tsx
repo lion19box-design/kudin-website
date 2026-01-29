@@ -185,4 +185,70 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
                   rows={3}
                   value={formData.comments}
                   onChange={(e) => setFormData({ ...formData, comments: e.target.value })}
-                  className="w-full resize-none border border-navy-lighter bg-navy/5
+                  className="w-full resize-none border border-navy-lighter bg-navy/50 px-4 py-3 font-serif text-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+                />
+              </div>
+
+              {/* GDPR Consent */}
+              <div className="flex items-start gap-3 pt-2">
+                <div className="flex h-6 items-center">
+                  <input
+                    id="consent"
+                    name="consent"
+                    type="checkbox"
+                    required
+                    checked={formData.consent}
+                    onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
+                    className="h-4 w-4 rounded border-navy-lighter bg-navy/50 text-gold focus:ring-gold accent-gold"
+                  />
+                </div>
+                <label htmlFor="consent" className="text-xs text-silver-muted/80 leading-tight cursor-pointer">
+                  I consent to Kudin & Sons processing my data in accordance with the <a href="#" className="underline hover:text-gold decoration-gold/50">Privacy Policy</a>.
+                </label>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={isSubmitting} // Блокируем кнопку пока идет отправка
+                className="btn-interactive group mt-6 flex w-full items-center justify-center gap-3 border border-gold bg-gold px-8 py-4 font-serif text-lg font-medium text-navy hover:bg-gold-light disabled:opacity-70 disabled:cursor-wait"
+              >
+                {isSubmitting ? (
+                   <>
+                     <Loader2 className="h-5 w-5 animate-spin" />
+                     Sending...
+                   </>
+                ) : (
+                   <>
+                     <Send className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                     Submit Request
+                   </>
+                )}
+              </button>
+            </form>
+          </>
+        ) : (
+          /* Success state */
+          <div className="flex flex-col items-center py-8 text-center">
+            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-gold/30 bg-gold/10">
+              <CheckCircle className="h-8 w-8 text-gold" />
+            </div>
+            <h3 className="mb-3 font-serif text-2xl font-light text-foreground">
+              Thank You
+            </h3>
+            <p className="mb-8 max-w-xs text-silver-muted">
+              We have received your request. We will contact you shortly to confirm details.
+            </p>
+            <button
+              type="button"
+              onClick={handleClose}
+              className="btn-interactive border border-gold/50 px-8 py-3 font-serif text-sm font-medium text-gold hover:border-gold hover:bg-gold/10"
+            >
+              Close
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
