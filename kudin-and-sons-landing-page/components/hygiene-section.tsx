@@ -1,6 +1,7 @@
 "use client"
 
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import { ShieldCheck } from "lucide-react"
 
 export function HygieneSection() {
   const { ref, isVisible } = useScrollAnimation()
@@ -50,31 +51,56 @@ export function HygieneSection() {
             </div>
           </div>
 
-          {/* Right: Before/After Visual - REPLACED WITH REAL IMAGE */}
+          {/* Right: Before/After Visual */}
           <div
             className={`transition-all duration-700 delay-200 ${
               isVisible ? "animate-fade-in-up opacity-100" : "opacity-0"
             }`}
           >
-            <div className="relative mx-auto aspect-square max-w-md rounded-full border-4 border-gold shadow-2xl overflow-hidden">
-              <img
-                src="/hygiene-comparison.png"
-                alt="Magnified comparison of cutlery before and after ultrasonic cleaning"
-                className="h-full w-full object-cover"
-              />
-              
-              {/* Labels overlay */}
-              <div className="absolute inset-0 flex text-center text-xs font-medium uppercase tracking-wider text-white/90 mix-blend-difference pointer-events-none">
-                <div className="flex-1 flex items-end justify-center pb-8 bg-black/10">
-                  Standard Clean
-                </div>
-                <div className="flex-1 flex items-end justify-center pb-8 bg-black/10">
-                  Ultrasonic Grade
+            <div className="relative">
+              {/* Magnifying Glass Frame (ORIGINAL STYLE RESTORED) */}
+              <div className="relative mx-auto aspect-square max-w-md overflow-hidden rounded-full border-4 border-gold/40 bg-navy p-1 shadow-[0_0_60px_-10px_rgba(201,169,97,0.3)]">
+                
+                {/* Inner ring */}
+                <div className="absolute inset-2 rounded-full border border-gold/20 z-20 pointer-events-none" />
+                
+                {/* REAL IMAGE INSERTED HERE */}
+                <div className="relative h-full w-full overflow-hidden rounded-full z-10">
+                  <img 
+                    src="/hygiene-comparison.png" 
+                    alt="Comparison" 
+                    className="h-full w-full object-cover"
+                  />
+                  
+                  {/* Center Divider Line */}
+                  <div className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-gold/60 h-full" />
                 </div>
               </div>
-              
-              {/* Center dividing line */}
-              <div className="absolute inset-y-0 left-1/2 w-px bg-gold/50"></div>
+
+              {/* Labels (Kept outside to not block the image) */}
+              <div className="mt-6 flex justify-between px-4 max-w-md mx-auto">
+                <div className="flex items-center gap-2 text-left">
+                  <div className="h-2 w-2 rounded-full bg-silver-muted/50" />
+                  <div>
+                    <div className="text-xs font-medium uppercase tracking-wider text-silver-muted">
+                      Standard Clean
+                    </div>
+                    <div className="text-xs text-silver-muted/60">Micro-residue</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-right">
+                  <div>
+                    <div className="text-xs font-medium uppercase tracking-wider text-gold">
+                      Ultrasonic Grade
+                    </div>
+                    <div className="text-xs text-gold/60">Sterile</div>
+                  </div>
+                  <ShieldCheck className="h-4 w-4 text-gold" strokeWidth={1.5} />
+                </div>
+              </div>
+
+              {/* Magnifying glass handle hint */}
+              <div className="absolute -bottom-4 -right-4 h-16 w-4 rotate-45 rounded-full bg-gradient-to-b from-gold/20 to-transparent" />
             </div>
           </div>
         </div>
