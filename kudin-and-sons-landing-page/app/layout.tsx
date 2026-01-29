@@ -10,28 +10,14 @@ const _cormorant = Cormorant_Garamond({
 });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: 'Kudin & Sons | Premium Restoration Services',
-  description: 'Professional silverware restoration, eyewear polishing, and knife sharpening services in the South of England. We bring luxury care to your doorstep.',
-  keywords: ['silverware restoration', 'eyewear cleaning', 'knife sharpening', 'ultrasonic cleaning', 'South England'],
+export const metadata = {
+  title: 'Kudin & Sons | Bespoke Ultrasonic Restoration',
+  description: 'Revitalising your finest possessions with precision ultrasonic technology. Eyewear, cutlery, and specialist tool restoration services delivered to your door in Winchester.',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
   },
-    generator: 'v0.app'
 }
 
 export const viewport: Viewport = {
