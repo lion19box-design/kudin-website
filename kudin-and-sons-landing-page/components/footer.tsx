@@ -13,7 +13,7 @@ export function Footer() {
       ref={ref as React.RefObject<HTMLElement>}
       className="relative border-t border-border px-6 py-16"
     >
-      {/* Top decorative line */}
+      {/* Top decorative line (Твой код сохранен) */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <div className="flex items-center gap-4">
           <div className="h-px w-16 bg-gold/40" />
@@ -28,7 +28,7 @@ export function Footer() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          {/* Brand */}
+          {/* Brand (Твой код сохранен) */}
           <div className="md:col-span-1">
             <h3 className="font-serif text-2xl font-semibold text-foreground">
               Kudin & Sons
@@ -41,7 +41,7 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Contact */}
+          {/* Contact (Твой код сохранен + добавлен w-fit для улучшения клика) */}
           <div className="space-y-4">
             <h4 className="text-sm font-medium uppercase tracking-wider text-gold">
               Contact
@@ -49,14 +49,14 @@ export function Footer() {
             <div className="space-y-3">
               <a
                 href="tel:+447342315204"
-                className="flex items-center gap-3 text-sm text-silver transition-all duration-300 hover:text-gold hover:translate-x-1"
+                className="flex w-fit items-center gap-3 text-sm text-silver transition-all duration-300 hover:text-gold hover:translate-x-1"
               >
                 <Phone className="h-4 w-4 text-gold/60" strokeWidth={1.5} />
                 +44 7342 315204
               </a>
               <a
                 href="mailto:KudinandSons@gmail.com"
-                className="flex items-center gap-3 text-sm text-silver transition-all duration-300 hover:text-gold hover:translate-x-1"
+                className="flex w-fit items-center gap-3 text-sm text-silver transition-all duration-300 hover:text-gold hover:translate-x-1"
               >
                 <Mail className="h-4 w-4 text-gold/60" strokeWidth={1.5} />
                 KudinandSons@gmail.com
@@ -68,7 +68,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Appointments */}
+          {/* Appointments (Твой код сохранен) */}
           <div className="space-y-4">
             <h4 className="text-sm font-medium uppercase tracking-wider text-gold">
               Appointments
@@ -80,7 +80,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
+        {/* Bottom bar (ВОТ ТУТ НОВЫЕ ЭФФЕКТЫ) */}
         <div 
           className={`mt-16 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row transition-all duration-700 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -90,35 +90,42 @@ export function Footer() {
             Kudin & Sons 2026. All rights reserved.
           </p>
           <div className="flex gap-6">
+            
+            {/* Privacy Policy с золотым подчеркиванием */}
             <Link 
               href="/privacy-policy" 
-              className="text-xs uppercase tracking-wider text-silver-muted transition-all duration-300 hover:text-gold"
+              className="group relative text-xs uppercase tracking-wider text-silver-muted transition-colors hover:text-gold"
             >
-              Privacy Policy
+              <span>Privacy Policy</span>
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
             </Link>
             
             <span className="text-silver-muted/40">|</span>
             
+            {/* Terms с золотым подчеркиванием */}
             <Link 
               href="/privacy-policy" 
-              className="text-xs uppercase tracking-wider text-silver-muted transition-all duration-300 hover:text-gold"
+              className="group relative text-xs uppercase tracking-wider text-silver-muted transition-colors hover:text-gold"
             >
-              Terms of Service
+              <span>Terms of Service</span>
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
             </Link>
             
             <span className="text-silver-muted/40">|</span>
             
-            {/* ИСПРАВЛЕННАЯ ССЫЛКА */}
+            {/* Cookie Policy с золотым подчеркиванием */}
             <Link 
               href="/cookie-policy" 
-              className="text-xs uppercase tracking-wider text-silver-muted transition-all duration-300 hover:text-gold"
+              className="group relative text-xs uppercase tracking-wider text-silver-muted transition-colors hover:text-gold"
             >
-              Cookie Policy
+              <span>Cookie Policy</span>
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
             </Link>
+            
           </div>
         </div>
 
-        {/* Trading Disclosure */}
+        {/* Trading Disclosure (Твой код сохранен) */}
         <div 
           className={`mt-6 text-center transition-all duration-700 delay-300 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
