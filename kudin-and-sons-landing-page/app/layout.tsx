@@ -42,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className={`font-sans antialiased ${cormorant.variable} ${geistMono.variable}`}>
         {/* ШАПКА ДОБАВЛЕНА СЮДА */}
         <Navbar />
