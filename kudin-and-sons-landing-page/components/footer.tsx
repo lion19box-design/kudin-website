@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react"
-
+import Link from "next/link" // Добавили правильный импорт для ссылок
 import { Phone, Mail, MapPin } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 
@@ -13,7 +13,7 @@ export function Footer() {
       ref={ref as React.RefObject<HTMLElement>}
       className="relative border-t border-border px-6 py-16"
     >
-      {/* Top decorative line */}
+      {/* Top decorative line (Тот самый ромбик и линии - ОСТАВИЛИ) */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <div className="flex items-center gap-4">
           <div className="h-px w-16 bg-gold/40" />
@@ -80,7 +80,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
+        {/* Bottom bar - ВОТ ТУТ МЫ ПОМЕНЯЛИ ССЫЛКИ */}
         <div 
           className={`mt-16 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row transition-all duration-700 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -90,17 +90,24 @@ export function Footer() {
             Kudin & Sons 2026. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a href="#" className="text-xs uppercase tracking-wider text-silver-muted transition-all duration-300 hover:text-gold">
+            {/* Ссылка на Privacy Policy */}
+            <Link href="/privacy-policy" className="text-xs uppercase tracking-wider text-silver-muted transition-all duration-300 hover:text-gold">
               Privacy Policy
-            </a>
+            </Link>
+            
             <span className="text-silver-muted/40">|</span>
-            <a href="#" className="text-xs uppercase tracking-wider text-silver-muted transition-all duration-300 hover:text-gold">
+            
+            {/* Временная ссылка на Terms (ведет на Privacy) */}
+            <Link href="/privacy-policy" className="text-xs uppercase tracking-wider text-silver-muted transition-all duration-300 hover:text-gold">
               Terms of Service
-            </a>
+            </Link>
+            
             <span className="text-silver-muted/40">|</span>
-            <a href="#" className="text-xs uppercase tracking-wider text-silver-muted transition-all duration-300 hover:text-gold">
+            
+            {/* Временная ссылка на Cookie (ведет на Privacy) */}
+            <Link href="/privacy-policy" className="text-xs uppercase tracking-wider text-silver-muted transition-all duration-300 hover:text-gold">
               Cookie Policy
-            </a>
+            </Link>
           </div>
         </div>
 
