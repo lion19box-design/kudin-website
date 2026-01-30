@@ -11,21 +11,21 @@ const FAQS = [
   },
   {
     question: "Do you service areas outside of Winchester?",
-    answer: "We primarily serve Winchester and the immediate surrounding Hampshire area to ensure our high standard of personal collection and delivery. Please contact us if you are slightly further afield, and we will try to accommodate you."
+    answer: "We primarily serve Winchester and the immediate surrounding Hampshire area. Please contact us if you are slightly further afield, and we will try to accommodate you."
   },
   {
     question: "How long does the restoration process take?",
-    answer: "Most services are completed within 48 to 72 hours from collection. For larger collections or complex restorations (like heavily tarnished cutlery sets), we will provide a precise timeframe upon inspection."
+    // ТЕКСТ ОБНОВЛЕН: Акцент на работу на месте
+    answer: "We perform the majority of our services on-site at your location, ensuring your items never leave your sight. Most appointments are completed within a single visit. Off-site restoration is reserved only for exceptionally complex or extensive collections."
   },
   {
     question: "What items can you not clean?",
-    answer: "We do not treat items with loose gemstones, porous stones (like pearls or opals), or cracked ivory handles. Our expert will always inspect your items upon collection and advise you if any piece is unsuitable for ultrasonic treatment."
+    answer: "We do not treat items with loose gemstones, porous stones (like pearls or opals), or cracked ivory handles. Our expert will always inspect your items prior to treatment and advise you if any piece is unsuitable."
   }
 ]
 
 export function FaqSection() {
   const { ref, isVisible } = useScrollAnimation()
-  // Храним индекс открытого вопроса (null = все закрыты)
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const toggleFaq = (index: number) => {
