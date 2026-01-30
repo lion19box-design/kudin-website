@@ -189,7 +189,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
                 />
               </div>
 
-              {/* GDPR Consent */}
+              {/* GDPR Consent - UPDATED LINK ONLY */}
               <div className="flex items-start gap-3 pt-2">
                 <div className="flex h-6 items-center">
                   <input
@@ -203,7 +203,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
                   />
                 </div>
                 <label htmlFor="consent" className="text-xs text-silver-muted/80 leading-tight cursor-pointer">
-                  I consent to Kudin & Sons processing my data in accordance with the <a href="#" className="underline hover:text-gold decoration-gold/50">Privacy Policy</a>.
+                  I consent to Kudin & Sons processing my data in accordance with the <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="underline hover:text-gold decoration-gold/50">Privacy Policy</a>.
                 </label>
               </div>
 
