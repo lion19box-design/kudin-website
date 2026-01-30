@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from 'next'
 import { Cormorant_Garamond, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
-// ВОТ НОВЫЙ ИМПОРТ (это подключение кнопки)
 import { ScrollToTop } from "@/components/scroll-to-top"
+import { Navbar } from "@/components/navbar" // НОВЫЙ ИМПОРТ
 
 const cormorant = Cormorant_Garamond({ 
   subsets: ["latin"],
@@ -22,7 +22,6 @@ export const metadata = {
   title: 'Kudin & Sons | Bespoke Ultrasonic Restoration',
   description: 'Revitalising your finest possessions with precision ultrasonic technology. Eyewear, cutlery, and specialist tool restoration services delivered to your door in Winchester.',
   icons: {
-    // Твои настройки иконок сохранены в точности
     icon: '/icon.png?v=2',
     shortcut: '/icon.png?v=2',
     apple: '/icon.png?v=2',
@@ -45,8 +44,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans antialiased ${cormorant.variable} ${geistMono.variable}`}>
+        {/* ШАПКА ДОБАВЛЕНА СЮДА */}
+        <Navbar />
         {children}
-        {/* ВОТ ЗДЕСЬ МЫ ВСТАВИЛИ КНОПКУ */}
         <ScrollToTop />
         <Analytics />
       </body>
