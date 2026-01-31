@@ -63,7 +63,7 @@ export default function CookiePolicy() {
 
           <div className="pt-8 border-t border-gold/20">
             <p className="text-sm">
-              If you have any questions about our use of cookies, please contact us at <a href="mailto:KudinandSons@gmail.com" className="text-gold hover:underline">KudinandSons@gmail.com</a>.
+              If you have any questions about our use of cookies, please contact us at <a href="mailto:info@kudinandsons.co.uk" className="text-gold hover:underline">KudinandSons@gmail.com</a>.
             </p>
           </div>
         </div>
