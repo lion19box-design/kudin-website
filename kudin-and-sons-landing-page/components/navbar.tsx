@@ -28,9 +28,16 @@ export function Navbar() {
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
-          {/* LOGO */}
-          <Link href="/" className="font-serif text-2xl font-semibold text-foreground tracking-tight hover:opacity-80 transition-opacity">
-            Kudin & Sons
+          {/* LOGO С ДОБАВЛЕННЫМ SVG */}
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <img 
+              src="/logo.svg" 
+              alt="Kudin & Sons Logo" 
+              className="h-9 w-auto" 
+            />
+            <span className="font-serif text-2xl font-semibold text-foreground tracking-tight">
+              Kudin & Sons
+            </span>
           </Link>
 
           {/* Right Side Actions */}
