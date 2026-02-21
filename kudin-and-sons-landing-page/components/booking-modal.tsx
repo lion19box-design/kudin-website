@@ -13,17 +13,17 @@ interface BookingModalProps {
 
 export function BookingModal({ isOpen, onClose, preSelectedService = "" }: BookingModalProps) {
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false) // Состояние загрузки
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
     email: "",
     service: preSelectedService,
+    source: "", // Поле для источника
     comments: "",
     consent: false,
   })
 
-  // Update service when preSelectedService changes
   useEffect(() => {
     if (preSelectedService) {
       setFormData(prev => ({ ...prev, service: preSelectedService }))
@@ -34,7 +34,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
     e.preventDefault()
     if (!formData.consent) return
 
-    setIsSubmitting(true) // Включаем режим "Отправка..."
+    setIsSubmitting(true)
 
     try {
       const response = await fetch("https://formspree.io/f/xvzrrdon", {
@@ -48,22 +48,21 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
 
       if (response.ok) {
         setIsSubmitted(true)
-        // Очистка формы (но не закрываем сразу, чтобы человек увидел "Спасибо")
-        setFormData({ fullName: "", phone: "", email: "", service: "", comments: "", consent: false })
+        setFormData({ fullName: "", phone: "", email: "", service: "", source: "", comments: "", consent: false })
       } else {
         alert("Oops! There was a problem submitting your form. Please try again.")
       }
     } catch (error) {
       alert("Error connecting to the server. Please check your internet connection.")
     } finally {
-      setIsSubmitting(false) // Выключаем режим загрузки
+      setIsSubmitting(false)
     }
   }
 
   const handleClose = () => {
     setIsSubmitted(false)
     setIsSubmitting(false)
-    setFormData({ fullName: "", phone: "", email: "", service: "", comments: "", consent: false })
+    setFormData({ fullName: "", phone: "", email: "", service: "", source: "", comments: "", consent: false })
     onClose()
   }
 
@@ -71,15 +70,12 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Glassmorphism backdrop */}
       <div
         className="absolute inset-0 bg-navy/60 backdrop-blur-md"
         onClick={handleClose}
       />
 
-      {/* Modal window */}
-      <div className="relative z-10 w-full max-w-md border border-gold/50 bg-navy-light/95 p-8 shadow-2xl backdrop-blur-sm max-h-[90vh] overflow-y-auto">
-        {/* Close button */}
+      <div className="relative z-10 w-full max-w-md border border-gold/50 bg-navy-light/95 p-8 shadow-2xl backdrop-blur-sm max-h-[90vh] overflow-y-auto scrollbar-hide">
         <button
           type="button"
           onClick={handleClose}
@@ -91,7 +87,6 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
 
         {!isSubmitted ? (
           <>
-            {/* Header */}
             <div className="mb-8 text-center">
               <div className="mb-4 flex items-center justify-center gap-3">
                 <div className="h-px w-8 bg-gold/60" />
@@ -105,9 +100,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
               </h3>
             </div>
 
-            {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Full Name */}
               <div className="space-y-2">
                 <label className="block text-sm font-medium uppercase tracking-wider text-silver-muted">
                   Full Name
@@ -123,7 +116,6 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
                 />
               </div>
 
-              {/* Phone Number */}
               <div className="space-y-2">
                 <label className="block text-sm font-medium uppercase tracking-wider text-silver-muted">
                   Phone Number
@@ -139,7 +131,6 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
                 />
               </div>
 
-              {/* Email Address */}
               <div className="space-y-2">
                 <label className="block text-sm font-medium uppercase tracking-wider text-silver-muted">
                   Email Address
@@ -155,7 +146,6 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
                 />
               </div>
 
-              {/* Service Type */}
               <div className="space-y-2">
                 <label className="block text-sm font-medium uppercase tracking-wider text-silver-muted">
                   Service Type
@@ -175,21 +165,41 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
                 </select>
               </div>
 
-              {/* Additional Comments */}
+              {/* Выпадающий список (Гармошка) - Как вы о нас узнали */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium uppercase tracking-wider text-silver-muted">
+                  How did you discover our services?
+                </label>
+                <select
+                  name="source"
+                  value={formData.source}
+                  onChange={(e) => setFormData({ ...formData, source: e.target.value })}
+                  className="w-full appearance-none border border-navy-lighter bg-navy/50 px-4 py-3 font-serif text-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+                >
+                  <option value="" disabled>Please select an option (Optional)</option>
+                  <option value="word_of_mouth">Word of mouth / Recommendation</option>
+                  <option value="google_search">Online Search (Google, Bing)</option>
+                  <option value="social_media">Social Media (Instagram, Facebook)</option>
+                  <option value="flyer">Printed Flyer / Brochure</option>
+                  <option value="ai">AI Assistant (ChatGPT, Gemini, etc.)</option>
+                  <option value="local_advertisement">Local Advertisement</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
               <div className="space-y-2">
                 <label className="block text-sm font-medium uppercase tracking-wider text-silver-muted">
                   Additional Comments
                 </label>
                 <textarea
                   name="comments"
-                  rows={3}
+                  rows={2}
                   value={formData.comments}
                   onChange={(e) => setFormData({ ...formData, comments: e.target.value })}
                   className="w-full resize-none border border-navy-lighter bg-navy/50 px-4 py-3 font-serif text-foreground focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
                 />
               </div>
 
-              {/* GDPR Consent - UPDATED LINK ONLY */}
               <div className="flex items-start gap-3 pt-2">
                 <div className="flex h-6 items-center">
                   <input
@@ -207,10 +217,9 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
                 </label>
               </div>
 
-              {/* Submit Button */}
               <button
                 type="submit"
-                disabled={isSubmitting} // Блокируем кнопку пока идет отправка
+                disabled={isSubmitting}
                 className="btn-interactive group mt-6 flex w-full items-center justify-center gap-3 border border-gold bg-gold px-8 py-4 font-serif text-lg font-medium text-navy hover:bg-gold-light disabled:opacity-70 disabled:cursor-wait"
               >
                 {isSubmitting ? (
@@ -228,7 +237,6 @@ export function BookingModal({ isOpen, onClose, preSelectedService = "" }: Booki
             </form>
           </>
         ) : (
-          /* Success state */
           <div className="flex flex-col items-center py-8 text-center">
             <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-gold/30 bg-gold/10">
               <CheckCircle className="h-8 w-8 text-gold" />
