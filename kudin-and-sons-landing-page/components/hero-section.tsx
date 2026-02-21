@@ -37,13 +37,13 @@ export function HeroSection() {
         </p>
 
         {/* ЦЕНТРАЛЬНЫЙ ЛОГОТИП (Вместо простого текста) */}
-        <div className="mt-16 flex flex-col items-center">
+        <div className="mt-8 flex flex-col items-center">
           <img
             src="/logo.svg"
             alt="Kudin & Sons Emblem"
-            className="h-28 md:h-36 w-auto object-contain drop-shadow-2xl"
+            className="h-28 md:h-36 w-auto object-contain drop-shadow-2xl transform scale-[1.3]"
           />
-          <span className="mt-4 text-xs font-medium uppercase tracking-[0.4em] text-silver-muted/60">
+          <span className="mt-6 text-xs font-medium uppercase tracking-[0.4em] text-silver-muted/60">
             South of England
           </span>
         </div>
@@ -52,7 +52,7 @@ export function HeroSection() {
         <button
           type="button"
           onClick={() => setIsModalOpen(true)}
-          className="btn-interactive group mt-12 flex items-center gap-3 rounded-none border border-gold bg-gold px-10 py-4 font-serif text-lg font-medium text-navy transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_30px_-5px_rgba(201,169,97,0.4)]"
+          className="btn-interactive group mt-10 flex items-center gap-3 rounded-none border border-gold bg-gold px-10 py-4 font-serif text-lg font-medium text-navy transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_30px_-5px_rgba(201,169,97,0.4)]"
         >
           <Sparkles className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
           Book a Visit
