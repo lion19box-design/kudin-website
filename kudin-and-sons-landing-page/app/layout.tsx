@@ -17,10 +17,39 @@ const geistMono = Geist_Mono({
   variable: "--font-mono",
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL('https://kudin-website.vercel.app'), 
   title: 'Kudin & Sons | Bespoke Ultrasonic Restoration',
   description: 'Revitalising your finest possessions with precision ultrasonic technology. Eyewear, cutlery, and specialist tool restoration services delivered to your door in Winchester.',
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: 'Kudin & Sons | Bespoke Ultrasonic Restoration',
+    description: 'Revitalising your finest possessions with precision ultrasonic technology in Winchester.',
+    url: 'https://kudin-website.vercel.app',
+    siteName: 'Kudin & Sons',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Kudin & Sons Ultrasonic Restoration',
+      },
+    ],
+    locale: 'en_GB',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Kudin & Sons | Bespoke Ultrasonic Restoration',
+    description: 'Revitalising your finest possessions with precision ultrasonic technology in Winchester.',
+    images: ['/og-image.jpg'],
+  },
   icons: {
     icon: '/icon.png?v=2',
     shortcut: '/icon.png?v=2',
