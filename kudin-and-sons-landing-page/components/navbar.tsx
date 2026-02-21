@@ -8,10 +8,8 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // Следим за скроллом
   useEffect(() => {
     const handleScroll = () => {
-      // Если прокрутили больше 20px, включаем "эффект стекла"
       setIsScrolled(window.scrollY > 20)
     }
     window.addEventListener("scroll", handleScroll)
@@ -23,17 +21,17 @@ export function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 border-b ${
           isScrolled
-            ? "bg-navy/80 backdrop-blur-md py-4 border-white/10 shadow-lg" // Стиль при скролле
-            : "bg-transparent py-4 border-transparent" // Чуть уменьшили отступ сверху для баланса
+            ? "bg-navy/80 backdrop-blur-md py-4 border-white/10 shadow-lg" 
+            : "bg-transparent py-4 border-transparent" 
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
-          {/* LOGO: Сильно увеличено, дублирующий текст убран */}
+          {/* LOGO: Применен "зум" для обхода пустых полей в SVG */}
           <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
             <img 
               src="/logo.svg" 
               alt="Kudin & Sons Logo" 
-              className="h-20 md:h-28 w-auto object-contain -ml-2" 
+              className="h-16 md:h-20 w-auto object-contain transform scale-[1.7] md:scale-[2.2] origin-left" 
             />
           </Link>
 
@@ -43,7 +41,6 @@ export function Navbar() {
               <Link href="/privacy-policy" className="hover:text-gold transition-colors">Privacy</Link>
             </div>
 
-            {/* CTA Button */}
             <button
               onClick={() => setIsModalOpen(true)}
               className={`rounded-sm border px-5 py-2 text-xs uppercase tracking-widest transition-all duration-300 ${
