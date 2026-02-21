@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://kudin-website.vercel.app'), 
+  metadataBase: new URL('https://www.kudinandsons.co.uk'), 
   title: 'Kudin & Sons | Bespoke Ultrasonic Restoration',
   description: 'Revitalising your finest possessions with precision ultrasonic technology. Eyewear, cutlery, and specialist tool restoration services delivered to your door in Winchester.',
   alternates: {
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Kudin & Sons | Bespoke Ultrasonic Restoration',
     description: 'Revitalising your finest possessions with precision ultrasonic technology in Winchester.',
-    url: 'https://kudin-website.vercel.app',
+    url: 'https://www.kudinandsons.co.uk',
     siteName: 'Kudin & Sons',
     images: [
       {
