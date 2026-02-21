@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { BookingModal } from "@/components/booking-modal" // Подключаем твою форму
+import { BookingModal } from "@/components/booking-modal"
 import Link from "next/link"
 
 export function Navbar() {
@@ -24,25 +24,21 @@ export function Navbar() {
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 border-b ${
           isScrolled
             ? "bg-navy/80 backdrop-blur-md py-4 border-white/10 shadow-lg" // Стиль при скролле
-            : "bg-transparent py-6 border-transparent" // Стиль наверху
+            : "bg-transparent py-4 border-transparent" // Чуть уменьшили отступ сверху для баланса
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
-          {/* LOGO С УВЕЛИЧЕННЫМ SVG */}
-          <Link href="/" className="flex items-center gap-4 hover:opacity-80 transition-opacity">
+          {/* LOGO: Сильно увеличено, дублирующий текст убран */}
+          <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
             <img 
               src="/logo.svg" 
               alt="Kudin & Sons Logo" 
-              className="h-14 md:h-16 w-auto" 
+              className="h-20 md:h-28 w-auto object-contain -ml-2" 
             />
-            <span className="font-serif text-2xl md:text-3xl font-semibold text-foreground tracking-tight">
-              Kudin & Sons
-            </span>
           </Link>
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-6">
-            {/* Скрытая навигация для десктопа (потом можно расширить) */}
             <div className="hidden md:flex gap-6 text-sm font-medium text-silver-muted">
               <Link href="/privacy-policy" className="hover:text-gold transition-colors">Privacy</Link>
             </div>
@@ -62,7 +58,6 @@ export function Navbar() {
         </div>
       </header>
 
-      {/* Модальное окно с формой (Оно живет внутри навбара, чтобы работать везде) */}
       <BookingModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
